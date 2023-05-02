@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>基于p4的网络监测系统</title>
+    <!--设置是否为缩放模式 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="js/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/bootstrap.min.js"></script>
+    <!--echarts JS-->
+    <script src="js/echarts.min.js"></script>
+    <!--界面样式-->
+
+    <link rel="stylesheet" type="text/css" href="css/visual.css">
+
+    <style>
+        .list-container {
+          width: 300px; /* 列表容器宽度 */
+          height: 200px; /* 列表容器高度 */
+          overflow: auto; /* 设置容器为可滚动 */
+        }
+  
+        .list-container::-webkit-scrollbar {
+          width: 8px; /* 滚动条宽度 */
+        }
+  
+        .list-container::-webkit-scrollbar-thumb {
+          background-color: #808080; /* 滚动条滑块颜色 */
+        }
+  
+        .list-container::-webkit-scrollbar-track {
+          background-color: #fff; /* 滚动条背景颜色 */
+        }
+  
+        .list-container::-webkit-scrollbar-corner {
+          background-color: #fff; /* 滚动条占用空间背景颜色 */
+          width: 12px; /* 滚动条占用空间宽度 */
+        }
+      </style>
+
+
+</head>
+
+<body class="ksh">
+    <div id="load">
+        <div class="load_img"><!-- 加载动画 -->
+            <img class="jzxz1" src="images/jzxz1.png">
+            <img class="jzxz2" src="images/jzxz2.png">
+        </div>
+    </div>
+    <div class="head_top">
+
+        <div>基于p4的网络监测系统</div>
+    </div>
+    <div class="visual">
+        <div class="visual_left">
+
+            <div class="visual_box">
+                <div class="visual_title">
+                    <span>协议数量</span>
+                    <img src="images/ksh33.png">
+                </div>
+                <div class="visual_chart" id="Bar"></div>
+                
+                
+            </div>
+            <div class="visual_box" >
+                <div class="visual_title">
+                    <span>链路流量</span>
+                    <img src="images/ksh33.png">
+                </div>
+
+                <div class="visual_chart sfzcll" style="height: 300px;">
+                    <a>起点</a>
+                    <a>终点</a>
+                    <a>流量</a>
+                    <div class="sfzcll_pos_box list-container">
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s1</label>
+                            <label>s2</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow2">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s1</label>
+                            <label>s3</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow3">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s1</label>
+                            <label>s4</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow4">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s1</label>
+                            <label>s5</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow5">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s2</label>
+                            <label>s6</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow6">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s3</label>
+                            <label>s6</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow7">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s4</label>
+                            <label>s6</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow8">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="sfzcll_box">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <img class="sfzcll_bkJk" src="images/ksh34.png">
+                            <label>s5</label>
+                            <label>s6</label>
+                            <div class="sfzcll_smallBk">
+                                <div class="ygh">
+                                    <span id="flow9">Unknown</span>
+                                    <script src="./js/get_flow.js"></script>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="visual_con">
+            <div class="visual_conTop">
+                <div class="visual_conTop_box visual_conTop1">
+                    <div>
+                        <h3>流量包数量</h3>
+                        <p id="packetCount"></p>
+                        <script src="./js/visual.js"></script>
+                    </div>
+                </div>
+                <div class="visual_conTop_box visual_conTop2">
+                    <div>
+                        <h3>协议类型</h3>
+                        <b id="protocolType"></b>
+                    </div>
+                </div>
+                <div class="visual_conTop_box visual_conTop1">
+                    <div>
+                        <h3>丢包率</h3>
+                        <p id="cal_loss">Unknown</p>
+                        <script src="./js/link_test.js"></script>
+                    </div>
+                </div>
+                <!-- <div class="visual_conTop_box visual_conTop2">
+                    <div>
+                        <h3>交换机队列长度</h3>
+                        <p>10</p>
+
+                    </div>
+                </div> -->
+                <div class="clear"></div>
+            </div>
+            
+            <div id="app"></div>
+            <script src="https://cdn.jsdelivr.net/npm/vue@3.2.16/dist/vue.global.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+            <!-- <script src="../src/main.js"></script> -->
+            
+
+        </div>
+        <div class="visual_right">
+            <div class="visual_box">
+                <div class="visual_title">
+                    <span>此时数据包到达的位置</span>
+                    <img src="images/ksh33.png">
+                </div>
+                <div class="swiper-container visual_swiper1 visual_chart">
+                    <div class="swiper-wrapper" style="height:100px">
+                        <img style="height:80px;margin-left: 30px;margin-top: 20px;" src="images/switch.png">
+                    </div>
+                    
+                    <div class="visual_title">
+                        <div id="location" style="color: rgb(127, 145, 237);margin-left: 50px;font-size: 25px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <div class="visual_box visualSfzsfl" >
+                    <div class="visual_title">
+                        <span>队列阈值</span>
+                        <img src="images/ksh33.png">
+                    </div>
+
+                    <div class="visual_table" style="overflow:auto;width:250px">
+                        <table>
+                            <tr>
+                                <td>交换机编号</td>
+                                <td>是否达到上限</td>
+                            </tr>
+                            <tr>
+                                <td>s1</td>
+                                <td><span id="limitS1">Unknown</span></td>
+                                <script src="./js/limitSwitch.js"></script>
+                            </tr>
+                            <tr>
+                                <td>s2</td>
+                                <td><span id="limitS2">Unknown</span></td>
+                                <script src="./js/limitSwitch.js"></script>
+                            </tr>
+                            <tr>
+                                <td>s3</td>
+                                <td><span id="limitS3">Unknown</span></td>
+                                <script src="./js/limitSwitch.js"></script>
+                            </tr>
+                            <tr>
+                                <td>s4</td>
+                                <td><span id="limitS4">Unknown</span></td>
+                                <script src="./js/limitSwitch.js"></script>
+                            </tr>
+                            <tr>
+                                <td>s5</td>
+                                <td><span id="limitS5">Unknown</span></td>
+                                <script src="./js/limitSwitch.js"></script>
+                            </tr>
+                            <tr>
+                                <td>s6</td>
+                                <td><span id="limitS6">Unknown</span></td>
+                                <script src="./js/limitSwitch.js"></script>
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="visual_box visualSfzsfl" style="margin-top: 150px;width:500px">
+                <div class="visual_title">
+                    <span>流量包计数</span>
+                    <img src="images/ksh33.png">
+                </div>
+                <div class="visual_table list-container" style="max-height:100px;">
+                    <table>
+                        <tr>
+                            <td>起点</td>
+                            <td>终点</td>
+                            <td>数量</td>
+                        </tr>
+                        <div >
+                            <tr>
+                                <td>s1</td>
+                                <td>s2</td>
+                                <td id="packet2">Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>s1</td>
+                                <td>s3</td>
+                                <td id="packet3">Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>s1</td>
+                                <td>s4</td>
+                                <td id="packet4">Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>s1</td>
+                                <td>s5</td>
+                                <td id="packet5">Unknown</td>
+                            </tr>
+    
+                            <tr>
+                                <td>s2</td>
+                                <td>s6</td>
+                                <td id="packet6">Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>s3</td>
+                                <td>s6</td>
+                                <td id="packet7">Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>s4</td>
+                                <td>s6</td>
+                                <td id="packet8">Unknown</td>
+                            </tr>
+                            <tr>
+                                <td>s5</td>
+                                <td>s6</td>
+                                <td id="packet9">Unknown</td>
+                                <script src="./js/visual.js"></script>
+                            </tr>
+                        </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <script type="text/javascript">
+        $(function () {
+            var a = $('.visualSssf_left a')
+            for (var i = 0; i < a.length; i++) {
+                a[i].index = i;
+                a[i].onclick = function () {
+                    for (var i = 0; i < a.length; i++) {
+                        a[i].className = ''
+                    }
+                    this.className = 'active'
+                }
+            }
+
+            var sfzcllH = $('.sfzcll_box').height()
+            var sfzcllHtwo = sfzcllH - 2
+            $('.sfzcll_box').css('line-height', sfzcllH + 'px')
+            $('.sfzcll_smallBk>div').css('line-height', sfzcllHtwo + 'px')
+
+            //删除加载动画
+            $('#load').fadeOut(1000)
+            setTimeout(function () {
+                $('#load').remove()
+            }
+                , 1100);
+        })
+
+        
+        //协议数量
+        //var myChart1 = echarts.init(document.getElementById('main1'));
+        //myChart1.setOption(option1);
+        
+        
+    </script>
+</body>
+
+</html>
